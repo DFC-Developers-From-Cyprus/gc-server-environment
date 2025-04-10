@@ -58,6 +58,11 @@ INSTALLED_APPS = [
     "django_filters",
     "corsheaders",
     # Apps ↓
+    "cleanup_action",
+    "complaint",
+    "polluted_area",
+    "pollution_measurement",
+    "project",
 ]
 
 # The `SITE_ID = 1` setting in Django is used to identify the current site in a multi-site setup.
@@ -158,7 +163,7 @@ REST_FRAMEWORK = {
 SPECTACULAR_SETTINGS = {
     "TITLE": "Documentation of APIs for Green Cyprus",
     "DESCRIPTION": """This documentation provides detailed information about the various APIs used by the Green Cyprus project. It includes endpoints, usage examples and other essential details to help developers interact with and integrate the API effectively""",
-    "VERSION": "0.0.0",
+    "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
     "CONTACT": {"name": "Leonid Jofe", "telegram": "https://t.me/LEON_JOFE"},
     "LICENSE": {"name": "MIT", "url": "https://opensource.org/licenses/MIT"},
