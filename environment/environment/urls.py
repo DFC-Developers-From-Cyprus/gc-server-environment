@@ -25,7 +25,7 @@ from drf_spectacular.views import (
 )
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("admin/", admin.site.urls),  # TODO Change on deploy!
     path("", include("cleanup_action.urls")),
     path("", include("complaint.urls")),
     path("", include("polluted_area.urls")),
@@ -35,15 +35,15 @@ urlpatterns = [
         "api/schema/",
         SpectacularAPIView.as_view(),
         name="schema",
-    ),
+    ),  # TODO Remove on deploy!
     path(
         "api/schema/swagger-ui/",
         SpectacularSwaggerView.as_view(url_name="schema"),
         name="swagger-ui",
-    ),
+    ),  # TODO Remove on deploy!
     path(
         "api/schema/redoc/",
         SpectacularRedocView.as_view(url_name="schema"),
         name="redoc",
-    ),
+    ),  # TODO Remove on deploy!
 ]
