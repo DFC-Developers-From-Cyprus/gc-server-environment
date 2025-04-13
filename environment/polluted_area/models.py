@@ -9,38 +9,41 @@ class PollutedArea(models.Model):
     )
 
     type_of_pollution = models.CharField(
-        verbose_name="Type of Pollution",
+        verbose_name="Type of pollution",
         choices=[
             ("water", "Water"),
             ("soil", "Soil"),
             ("waste", "Waste"),
+            ("other", "Other"),
         ],
+        default="other",
         max_length=20,
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
     )
 
     pollution_level = models.CharField(
-        verbose_name="Pollution Level",
+        verbose_name="Pollution level",
         choices=[
             ("low", "Low"),
             ("medium", "Medium"),
             ("high", "High"),
         ],
+        default="medium",
         max_length=20,
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
     )
 
     description = models.TextField(
-        verbose_name="Description",
+        verbose_name="Pollution description",
         max_length=1000,
         null=False,
         blank=False,
     )
 
     location = models.CharField(
-        verbose_name="Location",
+        verbose_name="Pollution location",
         max_length=255,
         null=False,
         blank=False,

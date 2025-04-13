@@ -19,12 +19,12 @@ class CleanupAction(models.Model):
         blank=True,
     )
     description = models.TextField(
-        verbose_name="Description",
+        verbose_name="Action description",
         null=False,
         blank=False,
     )
     photos = models.URLField(
-        verbose_name="Photos",
+        verbose_name="Action photos",
         null=False,
         blank=False,
     )
