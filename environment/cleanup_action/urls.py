@@ -18,9 +18,4 @@ urlpatterns = [
         CleanupActionViewSet.as_view({"get": "retrieve"}),
         name="cleanup-detail",
     ),
-    path(
-        "cleanupaction/<uuid:cleanup_uuid>/",
-        CleanupActionViewSet.as_view({"put": "update"}),
-        name="cleanup-update",
-    ),
 ]

@@ -10,7 +10,6 @@ from .extend_schema import (
     list_schema_decorator,
     get_by_id_schema_decorator,
     create_schema_decorator,
-    update_schema_decorator,
 )
 
 
@@ -28,8 +27,4 @@ class CleanupActionViewSet(viewsets.ModelViewSet):
 
     @get_by_id_schema_decorator
     def retrieve(self, request, *args, **kwargs):
-        pass
-
-    @update_schema_decorator
-    def update(self, request, *args, **kwargs):
         pass

@@ -51,13 +51,3 @@ create_schema_decorator = extend_schema(
         )
     },
 )
-
-update_schema_decorator = extend_schema(
-    tags=["CleanupAction"],
-    request=CleanupActionSerializer,
-    responses={
-        200: OpenApiResponse(
-            response=cleanupaction_schema,
-        )
-    },
-)
