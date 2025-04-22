@@ -172,8 +172,8 @@ REST_FRAMEWORK = {
 
 # Documentation Settings ↓
 SPECTACULAR_SETTINGS = {
-    "TITLE": "Documentation of APIs for Green Cyprus",
-    "DESCRIPTION": """This documentation provides detailed information about the various APIs used by the Green Cyprus project. It includes endpoints, usage examples and other essential details to help developers interact with and integrate the API effectively""",
+    "TITLE": "Enviroments API",
+    "DESCRIPTION": """Main API of web application - GCY""",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
     "CONTACT": {"name": "Leonid Jofe", "telegram": "https://t.me/LEON_JOFE"},

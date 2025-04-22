@@ -4,18 +4,18 @@ from .viewsets import CleanupActionViewSet
 
 urlpatterns = [
     path(
-        "cleanupactions/",
-        CleanupActionViewSet.as_view({"get": "list"}),
-        name="cleanup-list",
-    ),
-    path(
-        "cleanupaction/",
+        "cleanup-action/",
         CleanupActionViewSet.as_view({"post": "create"}),
         name="cleanup-create",
     ),
     path(
-        "cleanupaction/<uuid:cleanup_uuid>/",
+        "cleanup-action/<uuid:uuid>/",
         CleanupActionViewSet.as_view({"get": "retrieve"}),
         name="cleanup-detail",
+    ),
+    path(
+        "cleanup-actions/",
+        CleanupActionViewSet.as_view({"get": "list"}),
+        name="cleanup-list",
     ),
 ]
