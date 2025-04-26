@@ -1,3 +1,33 @@
 from django.db import models
 
-# Create your models here.
+
+class PollutionMeasurement(models.Model):
+    polluted_area_uuid = models.UUIDField(
+        verbose_name="UUID of the polluted area",
+        null=False,
+        blank=False,
+    )
+    pollution_type = models.CharField(
+        verbose_name="Type of pollutant measured",
+        max_length=255,
+        null=False,
+        blank=False,
+    )
+    measurement_date = models.DateTimeField(
+        verbose_name="Date and time when the measurement was taken",
+        auto_now_add=True,
+        null=True,
+        blank=True,
+    )
+    sensor_type = models.CharField(
+        verbose_name="Type of sensor",
+        max_length=255,
+    )
+    additional_data = models.JSONField(
+        verbose_name="Any additional data (dictionary)",
+        null=False,
+        blank=False,
+    )
+
+    def __str__(self):
+        return f"{self.pollution_type} - {self.sensor_type} at {self.measurement_date}"
