@@ -2,6 +2,11 @@ from django.db import models
 
 
 class Project(models.Model):
+    uuid = models.UUIDField(
+        unique=True,
+        null=False,
+        blank=False,
+    )
     title = models.CharField(
         verbose_name="Project title",
         unique=True,

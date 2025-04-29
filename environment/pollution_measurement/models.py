@@ -2,6 +2,11 @@ from django.db import models
 
 
 class PollutionMeasurement(models.Model):
+    uuid = models.UUIDField(
+        unique=True,
+        null=False,
+        blank=False,
+    )
     polluted_area_uuid = models.UUIDField(
         verbose_name="UUID of the polluted area",
         null=False,

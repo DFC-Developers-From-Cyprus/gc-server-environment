@@ -2,12 +2,16 @@ from django.db import models
 
 
 class PollutedArea(models.Model):
+    uuid = models.UUIDField(
+        unique=True,
+        null=False,
+        blank=False,
+    )
     project_uuid = models.UUIDField(
         verbose_name="Project UUID",
         null=False,
         blank=False,
     )
-
     type_of_pollution = models.CharField(
         verbose_name="Type of pollution",
         choices=[
@@ -21,7 +25,6 @@ class PollutedArea(models.Model):
         null=True,
         blank=True,
     )
-
     pollution_level = models.CharField(
         verbose_name="Pollution level",
         choices=[
@@ -34,28 +37,24 @@ class PollutedArea(models.Model):
         null=True,
         blank=True,
     )
-
     description = models.TextField(
         verbose_name="Pollution description",
         max_length=1000,
         null=False,
         blank=False,
     )
-
     location = models.CharField(
         verbose_name="Pollution location",
         max_length=255,
         null=False,
         blank=False,
     )
-
     created_at = models.DateTimeField(
         verbose_name="Created At",
         auto_now_add=True,
         null=True,
         blank=True,
     )
-
     updated_at = models.DateTimeField(
         verbose_name="Updated At",
         auto_now=True,

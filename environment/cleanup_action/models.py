@@ -2,6 +2,11 @@ from django.db import models
 
 
 class CleanupAction(models.Model):
+    uuid = models.UUIDField(
+        unique=True,
+        null=False,
+        blank=False,
+    )
     project_uuid = models.UUIDField(
         verbose_name="Project UUID",
         null=False,
