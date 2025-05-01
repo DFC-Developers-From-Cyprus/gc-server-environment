@@ -15,8 +15,8 @@ class PollutionMeasurement(models.Model):
     pollution_type = models.CharField(
         verbose_name="Type of pollutant measured",
         max_length=255,
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
     )
     measurement_date = models.DateTimeField(
         verbose_name="Date and time when the measurement was taken",
@@ -27,6 +27,8 @@ class PollutionMeasurement(models.Model):
     sensor_type = models.CharField(
         verbose_name="Type of sensor",
         max_length=255,
+        null=True,
+        blank=True,
     )
     additional_data = models.JSONField(
         verbose_name="Any additional data (dictionary)",
@@ -35,4 +37,4 @@ class PollutionMeasurement(models.Model):
     )
 
     def __str__(self):
-        return f"{self.pollution_type} - {self.sensor_type} at {self.measurement_date}"
+        return f"at {self.measurement_date}"
