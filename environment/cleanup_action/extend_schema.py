@@ -21,7 +21,35 @@ parameters_schema_decorator = extend_schema(
 
 cleanupaction_schema = {
     "type": "object",
-    "properties": {},
+    "properties": {
+        "uuid": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Уникальный идентификатор действия",
+        },
+        "project_uuid": {
+            "type": "string",
+            "format": "uuid",
+            "description": "UUID проекта, к которому относится действие",
+        },
+        "user_uuid": {
+            "type": "string",
+            "format": "uuid",
+            "description": "UUID пользователя, выполнившего действие",
+        },
+        "action_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Дата и время выполнения действия (автоматически добавляется)",
+        },
+        "description": {"type": "string", "description": "Описание действия"},
+        "photos": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL фотографии, связанной с действием",
+        },
+    },
+    "required": ["uuid", "project_uuid", "user_uuid", "description", "photos"],
 }
 
 list_schema_decorator = extend_schema(
