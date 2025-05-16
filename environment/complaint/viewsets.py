@@ -16,15 +16,39 @@ from .extend_schema import (
 class ComplaintViewSet(viewsets.ModelViewSet):
     queryset = Complaint.objects.all()
     serializer_class = ComplaintSerializer
-
-    @list_schema_decorator
-    def list(self, request, *args, **kwargs):
-        pass
+    lookup_field = "uuid"
 
     @create_schema_decorator
     def create(self, request, *args, **kwargs):
-        pass
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @get_by_id_schema_decorator
     def retrieve(self, request, *args, **kwargs):
-        pass
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @list_schema_decorator
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        # Optional: implement filtering by project_uuid, user_uuid, etc.
+        project_uuid = request.query_params.get("project_uuid")
+        user_uuid = request.query_params.get("user_uuid")
+
+        if project_uuid:
+            queryset = queryset.filter(project_uuid=project_uuid)
+        if user_uuid:
+            queryset = queryset.filter(user_uuid=user_uuid)
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
