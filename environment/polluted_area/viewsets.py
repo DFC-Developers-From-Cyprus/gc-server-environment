@@ -18,12 +18,7 @@ from .extend_schema import (
 class PollutedAreaViewSet(viewsets.ModelViewSet):
     queryset = PollutedArea.objects.all()
     serializer_class = PollutedAreaSerializer
-
-    @list_schema_decorator
-    def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    lookup_field = "uuid"
 
     @create_schema_decorator
     def create(self, request, *args, **kwargs):
@@ -41,7 +36,24 @@ class PollutedAreaViewSet(viewsets.ModelViewSet):
 
     @get_by_id_schema_decorator
     def retrieve(self, request, *args, **kwargs):
-        uuid = kwargs.get("uuid")
-        instance = get_object_or_404(self.get_queryset(), uuid=uuid)
+        instance = self.get_object()
         serializer = self.get_serializer(instance)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @list_schema_decorator
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        # Optional: implement filtering by project_uuid, etc.
+        project_uuid = request.query_params.get("project_uuid")
+
+        if project_uuid:
+            queryset = queryset.filter(project_uuid=project_uuid)
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)

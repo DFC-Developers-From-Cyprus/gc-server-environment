@@ -20,11 +20,17 @@ class CleanupActionViewSet(viewsets.ModelViewSet):
 
     @create_schema_decorator
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        new_uuid = uuid.uuid4()
+        while CleanupAction.objects.filter(uuid=new_uuid).exists():
+            new_uuid = uuid.uuid4()
+
+        data = request.data.copy()
+        data["uuid"] = str(new_uuid)
+
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     @get_by_id_schema_decorator
     def retrieve(self, request, *args, **kwargs):
