@@ -19,7 +19,29 @@ parameters_schema_decorator = extend_schema(
 
 pollutionmeasurement_schema = {
     "type": "object",
-    "properties": {},
+    "properties": {
+        "polluted_area_uuid": {
+            "type": "string",
+            "format": "uuid",
+            "description": "UUID загрязнённой зоны",
+        },
+        "pollution_type": {
+            "type": "string",
+            "enum": ["air", "waste", "water"],
+            "default": "waste",
+            "description": "Тип загрязнителя",
+        },
+        "sensor_type": {
+            "type": "string",
+            "enum": ["air"],
+            "default": "air",
+        },
+        "additional_data": {
+            "type": "object",
+            "description": "Дополнительные данные, связанные с измерением",
+        },
+    },
+    "required": ["polluted_area_uuid", "additional_data"],
 }
 
 get_by_id_schema_decorator = extend_schema(

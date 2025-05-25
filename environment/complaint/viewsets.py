@@ -6,7 +6,6 @@ from rest_framework.response import Response
 from .models import Complaint
 from .serializers import ComplaintSerializer
 from .extend_schema import (
-    parameters_schema_decorator,
     list_schema_decorator,
     get_by_id_schema_decorator,
     create_schema_decorator,
@@ -57,4 +56,4 @@ class ComplaintViewSet(viewsets.ModelViewSet):
             return self.get_paginated_response(serializer.data)
 
         serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)

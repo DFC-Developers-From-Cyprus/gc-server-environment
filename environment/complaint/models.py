@@ -47,17 +47,6 @@ class Complaint(models.Model):
         null=True,
         blank=True,
     )
-    priority = models.CharField(
-        verbose_name="Complaint priority",
-        choices=[
-            ("low", "Low"),
-            ("medium", "Medium"),
-            ("high", "High"),
-        ],
-        max_length=20,
-        null=True,
-        blank=True,
-    )
     photos = models.URLField(
         verbose_name="Complaint photos",
         max_length=2000,

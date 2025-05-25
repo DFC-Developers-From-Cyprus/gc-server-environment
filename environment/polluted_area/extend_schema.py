@@ -90,7 +90,7 @@ create_schema_decorator = extend_schema(
     tags=["PollutedArea"],
     request=PollutedAreaSerializer,
     responses={
-        200: OpenApiResponse(
+        201: OpenApiResponse(
             response=pollutedarea_schema,
         )
     },

@@ -28,11 +28,11 @@ class PollutedArea(models.Model):
     pollution_level = models.CharField(
         verbose_name="Pollution level",
         choices=[
-            ("low", "Low"),
-            ("medium", "Medium"),
-            ("high", "High"),
+            (1, "Low"),
+            (2, "Medium"),
+            (3, "High"),
         ],
-        default="medium",
+        default=2,
         max_length=20,
         null=True,
         blank=True,

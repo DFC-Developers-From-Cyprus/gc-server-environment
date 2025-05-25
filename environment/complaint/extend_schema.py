@@ -82,7 +82,6 @@ complaint_schema = {
     "required": ["uuid", "project_uuid", "user_uuid", "description", "photos"],
 }
 
-
 list_schema_decorator = extend_schema(
     tags=["Complaint"],
     responses={
@@ -105,7 +104,7 @@ create_schema_decorator = extend_schema(
     tags=["Complaint"],
     request=ComplaintSerializer,
     responses={
-        200: OpenApiResponse(
+        201: OpenApiResponse(
             response=complaint_schema,
         )
     },

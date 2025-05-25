@@ -13,7 +13,7 @@ def get_air_quality(location):
     data = response.json()
 
     if data["status"] != "ok":
-        return {"error": "API returned error"}
+        return False
 
     iaqi = data["data"].get("iaqi", {})
     timestamp = data["data"].get("time", {}).get("iso", "unknown")

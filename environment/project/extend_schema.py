@@ -99,7 +99,7 @@ create_schema_decorator = extend_schema(
     tags=["Project"],
     request=ProjectSerializer,
     responses={
-        200: OpenApiResponse(
+        201: OpenApiResponse(
             response=project_schema,
         )
     },
