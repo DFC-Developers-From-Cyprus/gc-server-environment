@@ -25,7 +25,7 @@ from drf_spectacular.views import (
 )
 
 urlpatterns = [
-    path("admin/", admin.site.urls),  # TODO Change on deploy!
+    path("A3Dm_iN-P3An6L/", admin.site.urls),
     path("", include("cleanup_action.urls")),
     path("", include("complaint.urls")),
     path("", include("polluted_area.urls")),

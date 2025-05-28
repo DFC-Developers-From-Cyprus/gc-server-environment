@@ -40,17 +40,8 @@ class ComplaintViewSet(viewsets.ModelViewSet):
     @list_schema_decorator
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
-
-        # Optional: implement filtering by project_uuid, user_uuid, etc.
-        project_uuid = request.query_params.get("project_uuid")
-        user_uuid = request.query_params.get("user_uuid")
-
-        if project_uuid:
-            queryset = queryset.filter(project_uuid=project_uuid)
-        if user_uuid:
-            queryset = queryset.filter(user_uuid=user_uuid)
-
         page = self.paginate_queryset(queryset)
+
         if page is not None:
             serializer = self.get_serializer(page, many=True)
             return self.get_paginated_response(serializer.data)

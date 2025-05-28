@@ -1,7 +1,14 @@
+import uuid
+
 from django.db import models
 
 
 class PollutionMeasurement(models.Model):
+    uuid = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+    )
     polluted_area_uuid = models.UUIDField(
         verbose_name="UUID of the polluted area",
         null=False,

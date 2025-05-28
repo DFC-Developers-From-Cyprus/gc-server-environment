@@ -1,11 +1,13 @@
+import uuid
+
 from django.db import models
 
 
 class PollutedArea(models.Model):
     uuid = models.UUIDField(
-        unique=True,
-        null=False,
-        blank=False,
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
     )
     project_uuid = models.UUIDField(
         verbose_name="Project UUID",
