@@ -25,24 +25,24 @@ from drf_spectacular.views import (
 )
 
 urlpatterns = [
-    path("A3Dm_iN-P3An6L/", admin.site.urls),
-    path("", include("cleanup_action.urls")),
-    path("", include("complaint.urls")),
-    path("", include("polluted_area.urls")),
-    path("", include("pollution_measurement.urls")),
-    path("", include("project.urls")),
+    path("env/A3Dm_iN-P3An6L/", admin.site.urls),
+    path("api/env/", include("cleanup_action.urls")),
+    path("api/env/", include("complaint.urls")),
+    path("api/env/", include("polluted_area.urls")),
+    path("api/env/", include("pollution_measurement.urls")),
+    path("api/env/", include("project.urls")),
     path(
-        "api/schema/",
+        "api/env/schema/",
         SpectacularAPIView.as_view(),
         name="schema",
     ),  # TODO Remove on deploy!
     path(
-        "api/schema/swagger-ui/",
+        "api/env/schema/swagger-ui/",
         SpectacularSwaggerView.as_view(url_name="schema"),
         name="swagger-ui",
     ),  # TODO Remove on deploy!
     path(
-        "api/schema/redoc/",
+        "api/env/schema/redoc/",
         SpectacularRedocView.as_view(url_name="schema"),
         name="redoc",
     ),  # TODO Remove on deploy!
