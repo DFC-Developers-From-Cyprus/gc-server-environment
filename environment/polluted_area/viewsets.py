@@ -2,6 +2,7 @@ import uuid
 
 from rest_framework import viewsets, status
 from rest_framework.response import Response
+from rest_framework.exceptions import NotFound
 
 from .models import PollutedArea
 from .serializers import PollutedAreaSerializer
@@ -10,6 +11,29 @@ from .extend_schema import (
     get_by_id_schema_decorator,
     create_schema_decorator,
 )
+
+
+class PollutedAreaFilterViewSet(viewsets.ModelViewSet):
+    queryset = PollutedArea.objects.all()
+    serializer_class = PollutedAreaSerializer
+    lookup_field = "location"
+
+    def retrieve(self, request, *args, **kwargs):
+        location = kwargs.get("location")
+
+        if not location:
+            return Response(
+                {"detail": "Location is required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        try:
+            location_obj = PollutedArea.objects.filter(location=location)
+        except PollutedArea.DoesNotExist:
+            raise NotFound(detail="Polluted area not found.")
+
+        serializer = PollutedAreaSerializer(location_obj, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class PollutedAreaViewSet(viewsets.ModelViewSet):

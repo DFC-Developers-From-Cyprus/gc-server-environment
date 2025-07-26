@@ -1,8 +1,13 @@
 from django.urls import path
 
-from .viewsets import CleanupActionViewSet
+from .viewsets import CleanupActionFilterViewSet, CleanupActionViewSet
 
 urlpatterns = [
+    path(
+        "organization-cleanup-action/<uuid:uuid>/",
+        CleanupActionFilterViewSet.as_view({"get": "retrieve"}),
+        name="organization-cleanup-action",
+    ),
     path(
         "cleanup-action/",
         CleanupActionViewSet.as_view({"post": "create"}),

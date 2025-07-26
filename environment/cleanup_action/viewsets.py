@@ -2,6 +2,7 @@ import uuid
 
 from rest_framework import viewsets, status
 from rest_framework.response import Response
+from rest_framework.exceptions import NotFound
 
 from .models import CleanupAction
 from .serializers import CleanupActionSerializer
@@ -10,6 +11,28 @@ from .extend_schema import (
     get_by_id_schema_decorator,
     list_schema_decorator,
 )
+
+
+class CleanupActionFilterViewSet(viewsets.ModelViewSet):
+    queryset = CleanupAction.objects.all()
+    serializer_class = CleanupActionSerializer
+
+    def retrieve(self, request, *args, **kwargs):
+        org_uuid = kwargs.get("uuid")
+
+        if not org_uuid:
+            return Response(
+                {"detail": "Organization UUID is required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        try:
+            org_obj = CleanupAction.objects.filter(org_uuid=org_uuid)
+        except CleanupAction.DoesNotExist:
+            raise NotFound(detail="Organization not found.")
+
+        serializer = CleanupActionSerializer(org_obj, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class CleanupActionViewSet(viewsets.ModelViewSet):

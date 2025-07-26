@@ -14,6 +14,11 @@ class CleanupAction(models.Model):
         null=False,
         blank=False,
     )
+    org_uuid = models.UUIDField(
+        verbose_name="Organization UUID",
+        null=False,
+        blank=False,
+    )
     user_uuid = models.UUIDField(
         verbose_name="User UUID",
         null=False,

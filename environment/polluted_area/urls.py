@@ -1,8 +1,13 @@
 from django.urls import path
 
-from .viewsets import PollutedAreaViewSet
+from .viewsets import PollutedAreaFilterViewSet, PollutedAreaViewSet
 
 urlpatterns = [
+    path(
+        "location-polluted-area/<str:location>/",
+        PollutedAreaFilterViewSet.as_view({"get": "retrieve"}),
+        name="location-polluted-area-detail",
+    ),
     path(
         "polluted-area/",
         PollutedAreaViewSet.as_view({"post": "create"}),
